@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import Navbar from "../../../components/Navbar/Navbar";
 import menuItems from "../../../constants/menuItems";
 
@@ -12,7 +12,7 @@ jest.mock("../../../hooks/useScrollProgress", () => ({
 jest.useFakeTimers();
 
 const renderWithRouter = (ui: React.ReactElement) => {
-  return render(<BrowserRouter>{ui}</BrowserRouter>);
+  return render(<MemoryRouter>{ui}</MemoryRouter>);
 };
 
 describe("Navbar", () => {
@@ -55,7 +55,11 @@ describe("Navbar", () => {
 
     // Rerender with scroll
     useScrollProgress.mockReturnValue(0.2);
-    rerender(<Navbar />);
+    rerender(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    );
     expect(screen.getByRole("navigation")).toHaveClass("scrolled");
   });
 
@@ -106,7 +110,7 @@ describe("Navbar", () => {
       // Ensure we're in mobile mode
       global.innerWidth = 500;
 
-      render(
+      renderWithRouter(
         <div>
           <Navbar />
           <div data-testid="outside">Outside</div>

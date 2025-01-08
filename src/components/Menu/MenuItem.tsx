@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import Submenu from "./Submenu";
 import { MenuItemProps } from "../../types/types";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import useResizeEffect from "../../hooks/useResizeEffect";
 import useMenuState from "../../hooks/useMenuState";
 import getIconComponent from "../../utils/iconMapper";
@@ -60,34 +60,47 @@ const MenuItem: React.FC<MenuItemProps> = ({
       aria-expanded={isHovered}
       tabIndex={0}
     >
-      <a
-        href={item.submenu ? undefined : item.href || "#"}
-        className="nav-link"
-        onClick={(e) => {
-          if (item.submenu) {
+      {item.submenu ? (
+        <span
+          className="nav-link"
+          onClick={(e) => {
             e.preventDefault();
             if (isMobile) {
               setIsHovered(!isHovered);
             }
-          } else if (isMobile && item.href) {
-            onMobileMenuClose?.();
-          }
-        }}
-        aria-label={`${item.label}${item.submenu ? " menu" : ""}`}
-      >
-        {item.icon && (
-          <span className="icon" aria-hidden="true">
-            {getIconComponent(item.icon)}
-          </span>
-        )}
-        <span className="label">{item.label}</span>
-        {item.submenu && (
+          }}
+          aria-label={`${item.label} menu`}
+        >
+          {item.icon && (
+            <span className="icon" aria-hidden="true">
+              {getIconComponent(item.icon)}
+            </span>
+          )}
+          <span className="label">{item.label}</span>
           <FiChevronDown
             className={`submenu-indicator ${isHovered ? "rotated" : ""}`}
             aria-hidden="true"
           />
-        )}
-      </a>
+        </span>
+      ) : (
+        <Link
+          to={item.href || "#"}
+          className="nav-link"
+          onClick={() => {
+            if (isMobile && item.href) {
+              onMobileMenuClose?.();
+            }
+          }}
+          aria-label={item.label}
+        >
+          {item.icon && (
+            <span className="icon" aria-hidden="true">
+              {getIconComponent(item.icon)}
+            </span>
+          )}
+          <span className="label">{item.label}</span>
+        </Link>
+      )}
       {item.submenu && (
         <Submenu
           items={item.submenu}

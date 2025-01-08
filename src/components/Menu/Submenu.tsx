@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { SubmenuProps } from "../../types/types";
 import useSubmenuPosition from "../../hooks/useSubmenuPosition";
 import useMobileState from "../../hooks/useMobileState";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 
 const Submenu: React.FC<SubmenuProps> = ({
   items,
@@ -35,15 +35,12 @@ const Submenu: React.FC<SubmenuProps> = ({
           }`}
           role="menuitem"
         >
-          <a
-            href={item.href}
+          <Link
+            to={item.href || "#"}
             className="submenu-link"
             onClick={() => {
               if (isMobile) {
                 onMobileMenuClose?.();
-                if (item.href) {
-                  navigate(item.href);
-                }
               }
             }}
             tabIndex={0}
@@ -55,7 +52,7 @@ const Submenu: React.FC<SubmenuProps> = ({
               </span>
             )}
             <span className="label">{item.label}</span>
-          </a>
+          </Link>
         </li>
       ))}
     </ul>

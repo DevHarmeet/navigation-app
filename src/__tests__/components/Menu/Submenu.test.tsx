@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import Submenu from "../../../components/Menu/Submenu";
 
 const renderWithRouter = (ui: React.ReactElement) => {
-  return render(<BrowserRouter>{ui}</BrowserRouter>);
+  return render(<MemoryRouter>{ui}</MemoryRouter>);
 };
 
 describe("Submenu", () => {
@@ -48,13 +48,15 @@ describe("Submenu", () => {
     );
 
     rerender(
-      <Submenu
-        items={mockItems}
-        isActive={true}
-        isScrolled={false}
-        parentRef={mockParentRef}
-        id="test-submenu"
-      />
+      <MemoryRouter>
+        <Submenu
+          items={mockItems}
+          isActive={true}
+          isScrolled={false}
+          parentRef={mockParentRef}
+          id="test-submenu"
+        />
+      </MemoryRouter>
     );
 
     expect(screen.getByRole("menu")).toHaveClass("active");
@@ -142,13 +144,15 @@ describe("Submenu", () => {
     });
 
     rerender(
-      <Submenu
-        items={mockItems}
-        isActive={true}
-        isScrolled={false}
-        parentRef={mockParentRef}
-        id="test-submenu"
-      />
+      <MemoryRouter>
+        <Submenu
+          items={mockItems}
+          isActive={true}
+          isScrolled={false}
+          parentRef={mockParentRef}
+          id="test-submenu"
+        />
+      </MemoryRouter>
     );
   });
 });
