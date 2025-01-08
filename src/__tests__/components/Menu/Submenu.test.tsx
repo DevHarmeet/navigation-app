@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import Submenu from "../../../components/Menu/Submenu";
-import { FiHome } from "react-icons/fi";
 
 const renderWithRouter = (ui: React.ReactElement) => {
   return render(<BrowserRouter>{ui}</BrowserRouter>);
@@ -10,7 +9,7 @@ const renderWithRouter = (ui: React.ReactElement) => {
 
 describe("Submenu", () => {
   const mockItems = [
-    { label: "Item 1", href: "/item1", icon: <FiHome /> },
+    { label: "Item 1", href: "/item1", icon: "FiHome" },
     { label: "Item 2", href: "/item2" },
   ];
 

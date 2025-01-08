@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import MenuItem from "../../../components/Menu/MenuItem";
-import { FiHome } from "react-icons/fi";
 
 jest.useFakeTimers();
 
@@ -18,12 +17,12 @@ describe("MenuItem", () => {
   const mockItem = {
     label: "Test Item",
     href: "/test",
-    icon: <FiHome />,
+    icon: "FiHome",
   };
 
   const mockItemWithSubmenu = {
     label: "Test With Submenu",
-    icon: <FiHome />,
+    icon: "FiHome",
     submenu: [
       { label: "Sub Item 1", href: "/sub1" },
       { label: "Sub Item 2", href: "/sub2" },

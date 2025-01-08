@@ -1,10 +1,8 @@
-import { ReactNode } from "react";
-
 export interface MenuItemType {
   label: string;
   href?: string;
-  icon?: ReactNode;
-  submenu?: { label: string; href: string; icon?: ReactNode }[];
+  icon?: string;
+  submenu?: { label: string; href: string; icon?: string }[];
 }
 
 export interface MenuItemProps {

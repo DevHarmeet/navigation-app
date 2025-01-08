@@ -1,4 +1,4 @@
-import { useEffect, RefObject } from "react";
+import { useEffect } from "react";
 
 interface UseMenuStateProps {
   isMobile: boolean;

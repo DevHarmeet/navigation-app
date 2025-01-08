@@ -5,6 +5,7 @@ import { MenuItemProps } from "../../types/types";
 import { useLocation } from "react-router-dom";
 import useResizeEffect from "../../hooks/useResizeEffect";
 import useMenuState from "../../hooks/useMenuState";
+import getIconComponent from "../../utils/iconMapper";
 
 const MenuItem: React.FC<MenuItemProps> = ({
   item,
@@ -76,7 +77,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
       >
         {item.icon && (
           <span className="icon" aria-hidden="true">
-            {item.icon}
+            {getIconComponent(item.icon)}
           </span>
         )}
         <span className="label">{item.label}</span>
