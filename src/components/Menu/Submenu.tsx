@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { SubmenuProps } from "../../types/types";
 import useSubmenuPosition from "../../hooks/useSubmenuPosition";
 import useMobileState from "../../hooks/useMobileState";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 const Submenu: React.FC<SubmenuProps> = ({
   items,
@@ -13,7 +13,6 @@ const Submenu: React.FC<SubmenuProps> = ({
 }) => {
   const submenuRef = useRef<HTMLUListElement>(null);
   const location = useLocation();
-  const navigate = useNavigate();
   const isMobile = useMobileState();
 
   useSubmenuPosition({ submenuRef, parentRef, isActive });
