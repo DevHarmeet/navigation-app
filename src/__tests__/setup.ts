@@ -30,7 +30,6 @@ jest.mock("react-router-dom", () => ({
   },
 }));
 
-// Mock window.matchMedia
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({
@@ -45,12 +44,10 @@ Object.defineProperty(window, "matchMedia", {
   })),
 });
 
-// Set up window properties
 window.scrollTo = jest.fn();
 window.innerWidth = 1024;
 window.innerHeight = 768;
 
-// Clear mocks between tests
 beforeEach(() => {
   jest.clearAllMocks();
 });

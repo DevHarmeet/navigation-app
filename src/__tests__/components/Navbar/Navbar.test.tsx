@@ -48,12 +48,10 @@ describe("Navbar", () => {
     const useScrollProgress =
       require("../../../hooks/useScrollProgress").default;
 
-    // Initial render with no scroll
     useScrollProgress.mockReturnValue(0);
     const { rerender } = renderWithRouter(<Navbar />);
     expect(screen.getByRole("navigation")).not.toHaveClass("scrolled");
 
-    // Rerender with scroll
     useScrollProgress.mockReturnValue(0.2);
     rerender(
       <MemoryRouter>
@@ -107,7 +105,6 @@ describe("Navbar", () => {
     });
 
     it("closes mobile menu when clicking outside", () => {
-      // Ensure we're in mobile mode
       global.innerWidth = 500;
 
       renderWithRouter(
@@ -120,16 +117,13 @@ describe("Navbar", () => {
       const button = screen.getByLabelText("Toggle menu");
       const menu = screen.getByRole("list");
 
-      // First open the menu
       act(() => {
         fireEvent.click(button);
         jest.runAllTimers();
       });
       expect(menu).toHaveClass("open");
 
-      // Then click outside
       act(() => {
-        // Simulate a complete click outside event
         document.dispatchEvent(new MouseEvent("mousedown", { bubbles: true }));
         jest.runAllTimers();
       });
